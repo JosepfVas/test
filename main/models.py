@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Category(models.Model):
@@ -20,7 +21,7 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='цена')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='дата обновления')
-    manufactured_at = models.DateTimeField(auto_now_add=True, verbose_name='дата производства')
+    manufactured_at = models.DateTimeField(default=timezone.now, verbose_name='дата производства')
 
     def __str__(self):
         return (f'{self.name} {self.description} {self.price} {self.image} {self.category} {self.price}'
