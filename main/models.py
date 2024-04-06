@@ -5,7 +5,7 @@ NULLABLE = {'blank': True, 'null': True}
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=50, verbose_name='название')
+    name = models.CharField(max_length=50, verbose_name='категории')
     description = models.TextField(verbose_name='описание', **NULLABLE)
 
     def __str__(self):
@@ -15,11 +15,13 @@ class Category(models.Model):
             return self.name
 
     class Meta:
-        pass
+        verbose_name = 'категория'
+        verbose_name_plural = 'категории'
+        ordering = ('name',)
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=50, verbose_name='название')
+    name = models.CharField(max_length=50, verbose_name='продукт')
     description = models.TextField(verbose_name='описание', **NULLABLE)
     image = models.ImageField(upload_to='product_images/', verbose_name='картинка', **NULLABLE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='категория')
@@ -32,6 +34,7 @@ class Product(models.Model):
                 f'{self.created_at} {self.updated_at}')
 
     class Meta:
-        pass
-
+        verbose_name = 'продукт'
+        verbose_name_plural = 'продукта'
+        ordering = ('name',)
 
