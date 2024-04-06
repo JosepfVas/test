@@ -1,13 +1,18 @@
 from django.db import models
-from django.utils import timezone
+
+
+NULLABLE = {'blank': True, 'null': True}
 
 
 class Category(models.Model):
     name = models.CharField(max_length=50, verbose_name='название')
-    description = models.TextField(verbose_name='описание')
+    description = models.TextField(verbose_name='описание', **NULLABLE)
 
     def __str__(self):
-        return f'{self.name} {self.description}'
+        if self.description:
+            return f'{self.name} {self.description}'
+        else:
+            return self.name
 
     class Meta:
         pass
@@ -15,8 +20,8 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=50, verbose_name='название')
-    description = models.TextField(verbose_name='описание')
-    image = models.ImageField()
+    description = models.TextField(verbose_name='описание', **NULLABLE)
+    image = models.ImageField(upload_to='product_images/', verbose_name='картинка', **NULLABLE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='категория')
     price = models.IntegerField(verbose_name='цена')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='дата создания')
