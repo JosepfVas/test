@@ -4,15 +4,15 @@
     "pk": 1,
     "fields": {
       "name": "Фрукт",
-      "description": null
+      "description": ""
     }
   },
   {
     "model": "main.category",
     "pk": 2,
     "fields": {
-      "name": "Овощ",
-      "description": null
+      "name": "овощ",
+      "description": ""
     }
   }
 ]
