@@ -35,6 +35,7 @@ class Command(BaseCommand):
                 Product(
                     name=product['fields']['name'],
                     price=product['fields']['price'],
+                    image=product['fields']['image'],
                     description=product['fields']['description'],
                     category=category_dict.get(product['fields']['category'])
                 )
