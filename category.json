@@ -1,0 +1,18 @@
+[
+  {
+    "model": "main.category",
+    "pk": 1,
+    "fields": {
+      "name": "Фрукт",
+      "description": ""
+    }
+  },
+  {
+    "model": "main.category",
+    "pk": 2,
+    "fields": {
+      "name": "овощ",
+      "description": ""
+    }
+  }
+]
