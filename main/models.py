@@ -28,13 +28,17 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='цена')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='дата обновления')
+    views = models.PositiveIntegerField(default=0, verbose_name='просмотры')
+    slug = models.CharField(max_length=100, verbose_name='slug', **NULLABLE)
+    published = models.BooleanField(default=True, verbose_name='Есть в наличии')
 
     def __str__(self):
         return (f'{self.name} {self.description} {self.price} {self.image} {self.category} {self.price}'
-                f'{self.created_at} {self.updated_at}')
+                f'{self.created_at} {self.updated_at} {self.views} {self.published}')
 
     class Meta:
         verbose_name = 'продукт'
         verbose_name_plural = 'продукта'
         ordering = ('name',)
+
 
