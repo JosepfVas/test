@@ -1,4 +1,3 @@
-from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
 from pytils.translit import slugify
@@ -22,6 +21,7 @@ class ProductListView(ListView):
         elif available == 'outofstock':
             queryset = queryset.filter(published=False)
         return queryset
+
 
 class ProductDetailView(DetailView):
     model = Product
