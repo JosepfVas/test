@@ -12,24 +12,6 @@ from version.forms import VersionForm
 class ProductListView(ListView):
     model = Product
 
-    # def get_queryset(self):
-    #     queryset = super().get_queryset()
-    #     available = self.request.GET.get('published')
-    #     if available == 'instock':
-    #         queryset = queryset.filter(published=True)
-    #     elif available == 'outofstock':
-    #         queryset = queryset.filter(published=False)
-    #     return queryset
-    #
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     products = context['object_list']
-    #     for product in products:
-    #         active_version = product.version.filter(version_true=True).first()
-    #         if active_version:
-    #             product.active_version = active_version
-    #     return context
-
     def get_queryset(self):
         queryset = super().get_queryset()
         available = self.request.GET.get('published')
