@@ -14,7 +14,12 @@
                     </svg>
                     <div class="card-body">
                         <p class="card-text">{{ object.name }}</p>
-                        <p class="card-text">{{ object.price }} ₽</p>
+                        <p class="card-text">{{ object.price }} {{ object.version_name }}₽</p>
+                        {% if object.active_version_name %}
+                        <p class="card-text">Текущий сорт: {{ object.active_version_name }}</p>
+                        {% else %}
+                        <p class="card-text">Сорт отсутствует</p>
+                        {% endif %}
                         {% if object.published %}
                         <p class="card-text">В наличии</p>
                         {% else %}
@@ -24,7 +29,7 @@
                             <div class="btn-group">
                                 <a class="btn btn-primary" href="{% url 'main:product_detail' object.pk %}"
                                    role="button">Описание</a>
-                                 <a class="btn btn-warning" href="{% url 'main:product_update' object.pk %}"
+                                <a class="btn btn-warning" href="{% url 'main:product_update' object.pk %}"
                                    role="button">Редактировать</a>
                                 <a class="btn btn-danger" href="{% url 'main:product_delete' object.pk %}"
                                    role="button">Удалить</a>

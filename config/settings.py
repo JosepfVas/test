@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     'main',
     'blog',
+    'version',
 
 ]
 

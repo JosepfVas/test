@@ -1,23 +1,33 @@
 {% extends 'main/base.html' %}
 {% block content %}
-    <div class="container">
+<div class="container">
+    <form class="row" method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <form class="row" method="post" enctype="multipart/form-data">
-                    <div class="card">
-                        <div class="card-body">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            {% if object %}
-                            <button type="submit" class="btn btn-primary">Сохранить</button>
-                            {% else %}
-                            <button type="submit" class="btn btn-primary">Создать</button>
-                            {% endif %}
-                            <a class="btn btn-dark" href="{% url 'main:products_list' %}" role="button">Назад</a>
-                        </div>
+                <div class="card">
+                    <div class="card-body">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        {% if object %}
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                        {% else %}
+                        <button type="submit" class="btn btn-primary">Создать</button>
+                        {% endif %}
+                        <a class="btn btn-dark" href="{% url 'main:products_list' %}" role="button">Назад</a>
                     </div>
-                </form>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                        {{ formset.management_form }}
+                        {% for form in formset.forms %}
+                        {{ form.as_p }}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
+</div>
 {% endblock %}
