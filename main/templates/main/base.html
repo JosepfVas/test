@@ -175,9 +175,11 @@
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="fw-light">Добро пожаловать!</h1>
                 <p class="lead text-body-secondary">Представляем вашему вниманию каталог наших лучших товаров.</p>
+                {% if user.is_authenticated %}
                 <p class="lead text-body-secondary"
                 >Нажав на кнопку <<a class="btn btn-dark" href="{% url 'main:product_create' %}" role="button"
                 >Добавить</a>>, Вы сможете добавить товар в наш список.</p>
+                {% endif %}
                 <a href="{% url 'main:products_list' %}">Все товары</a>
                 <a href="{% url 'main:products_list' %}?published=instock">В наличии</a>
                 <a href="{% url 'main:products_list' %}?published=outofstock">Нет в наличии</a>

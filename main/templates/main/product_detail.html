@@ -15,6 +15,7 @@
                     <div class="card-body">
                         <p class="card-text">{{ object.name }}</p>
                         <p class="card-text">{{ object.description }}</p>
+                        <p class="card-text">Добавил пользователь: {{ object.owner }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a class="btn btn-primary" href="{% url 'main:products_list' %}" role="button">Назад</a>
