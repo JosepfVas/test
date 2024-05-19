@@ -34,3 +34,15 @@ class ProductForm(StyleFormMixin, ModelForm):
             if word in description.lower():
                 raise forms.ValidationError(f'Описание содержит запрещенное слово: {word}')
         return description
+
+
+class ProductModeratorForm(StyleFormMixin, ModelForm):
+    class Meta:
+        model = Product
+        fields = ('description', 'published', 'category')
+
+
+class ProductOwnerFrom(StyleFormMixin, ModelForm):
+    class Meta:
+        model = Product
+        exclude = ('slug', 'views', 'owner')

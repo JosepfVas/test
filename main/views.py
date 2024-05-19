@@ -1,10 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.forms import inlineformset_factory
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
 from pytils.translit import slugify
 
-from main.forms import ProductForm
+from main.forms import ProductForm, ProductModeratorForm, ProductOwnerFrom
 from main.models import Product
 from version.models import Version
 from version.forms import VersionForm
@@ -82,6 +83,15 @@ class ProductUpdateView(UpdateView, LoginRequiredMixin):
             return super().form_valid(form)
         else:
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
+
+    def get_form_class(self):
+        user = self.request.user
+        if user == self.object.owner:
+            return ProductOwnerFrom
+        if user.has_perm('main.can_edit_description') and user.has_perm('main.can_edit_price') and user.has_perm(
+                'main.can_edit_category'):
+            return ProductModeratorForm
+        raise PermissionDenied
 
 
 class ProductDeleteView(DeleteView, LoginRequiredMixin):
