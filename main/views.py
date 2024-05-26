@@ -7,6 +7,7 @@ from pytils.translit import slugify
 
 from main.forms import ProductForm, ProductModeratorForm, ProductOwnerFrom
 from main.models import Product
+from main.services import get_products_from_cache
 from version.models import Version
 from version.forms import VersionForm
 
@@ -15,13 +16,7 @@ class ProductListView(ListView):
     model = Product
 
     def get_queryset(self):
-        queryset = super().get_queryset()
-        available = self.request.GET.get('published')
-        if available == 'instock':
-            queryset = queryset.filter(published=True)
-        elif available == 'outofstock':
-            queryset = queryset.filter(published=False)
-        return queryset
+        return get_products_from_cache()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
